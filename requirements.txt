@@ -1,0 +1,13 @@
+evaluate
+matplotlib
+numpy
+nltk==3.8.1
+pandas
+ray
+rouge_score
+scipy
+sentence_transformers
+torchmetrics[text]
+typer
+ujson
+

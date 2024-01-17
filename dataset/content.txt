@@ -1,0 +1,47 @@
+# machine: 10.100.71.43
+copy content from ~/workplace/ankush/repos/Evaluation-Framework-for-Personalized-Summarization/EGISES_subjectivity/dataset
+.
+├── consolidated_data.jsonl
+├── content.txt
+├── data_with_distb
+│   ├── data_with_distb_big_bird_roberta.pkl
+│   ├── data_with_distb_brio_roberta.pkl
+│   ├── data_with_distb_cls_roberta.pkl
+│   ├── data_with_distb_EBNR_1_roberta.pkl
+│   ├── data_with_distb_EBNR_2_roberta.pkl
+│   ├── data_with_distb_NAML_1_roberta.pkl
+│   ├── data_with_distb_NRMS_1_roberta.pkl
+│   ├── data_with_distb_NRMS_2_roberta.pkl
+│   ├── data_with_distb_prophetnet_roberta.pkl
+│   └── data_with_distb_t5_base_roberta.pkl
+├── final_tokenized_consolidated_data.jsonl
+├── human responses
+│   ├── responses_1212.pkl
+│   ├── responses_1224.pkl
+│   ├── responses_132.pkl
+│   ├── responses_480.pkl
+│   ├── responses_660.pkl
+│   ├── responses_90.pkl
+│   ├── survey_db_v3_660.sqlite3
+│   └── survey_db_v3.sqlite3
+├── org_dataset
+│   ├── big_bird_data.pkl
+│   ├── brio_data.pkl
+│   ├── cls_data.pkl
+│   ├── combined_personalized_dataset.pkl
+│   ├── combined_raw_dataset.pkl
+│   ├── prophetnet_data.pkl
+│   ├── t5_base_data.pkl
+│   ├── tokenized_big_bird.pkl
+│   ├── tokenized_brio.pkl
+│   ├── tokenized_cls.pkl
+│   ├── tokenized_EBNR_1.pkl
+│   ├── tokenized_EBNR_2.pkl
+│   ├── tokenized_NAML_1.pkl
+│   ├── tokenized_NRMS_1.pkl
+│   ├── tokenized_NRMS_2.pkl
+│   ├── tokenized_prophetnet.pkl
+│   └── tokenized_t5_base.pkl
+└── survey_db_v3.sqlite3
+
+3 directories, 39 files

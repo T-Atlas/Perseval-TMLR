@@ -1,0 +1,12 @@
+# content to be populated via populate-distances generate-scores generate-perseval results.
+├── calculate_bert_score
+├── calculate_bleu
+├── calculate_hj
+├── calculate_infoLM
+├── calculate_JSD
+├── calculate_meteor
+├── calculate_rougeL
+├── calculate_rougeSU4
+└── content.txt
+
+8 directories, 1 files
