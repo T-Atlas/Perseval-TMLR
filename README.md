@@ -13,7 +13,8 @@ This repository contains the code for the experiments on subjectivity detection 
 - meteor
 - bleu
 - bertscore
-- infoLM (pending)
+- infoLM
+- JSD
 ## Scripts
 - `data_preprocessing.py`: 
   - consolidates previously generate data into a single jsonl file  
