@@ -1,4 +1,7 @@
 # content to be populated via populate-distances generate-scores generate-perseval results.
+For now you can download and extract precalculated_distances.zip in this folder and calculate scores directly
+# machine: 10.100.71.43
+copy content from ~/workplace/ankush/repos/perseval_evaluation/precalculated_distances.zip
 ├── calculate_bert_score
 ├── calculate_bleu
 ├── calculate_hj
