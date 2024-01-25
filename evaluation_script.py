@@ -190,7 +190,7 @@ def populate_distances(model_name: str, distance_measure: str, max_workers: int 
 
 @app.command()
 def generate_scores(distance_measure: str, sampling_freq: int = 10, max_workers: int = 1, simplified_flag: bool = False,
-                    version="v2"):
+                    stability: bool = False, version="v2"):
     """
     distance_measure: one of meteor, bleu, rougeL, rougeSU4, infoLM, jsd
     sampling_freq: sampling frequency for percentage less than 100
@@ -228,7 +228,15 @@ def generate_scores(distance_measure: str, sampling_freq: int = 10, max_workers:
                     documents=utils.get_model_documents(model_name, CONSOLIDATED_FILEPATH),
                     score_directory=distance_directory, max_workers=max_workers, version=version)
         eg.populate_distances(simplified_flag=simplified_flag)
-        for sample_percentage in range(100, 10, -20):
+
+        if stability:
+            header_range = range(100, 10, -20)
+            header = ["models", *list(range(100, 10, -20)), "bias", "variance"]
+        else:
+            header_range = range(100, 110, 10)
+            header = ["models", "100", "bias", "variance"]
+
+        for sample_percentage in header_range:
             print(f"calculating for {model_name} with sample percentage {sample_percentage}")
             if sample_percentage == 100:
                 eg_score, accuracy_score = eg.get_egises_score(sample_percentage=sample_percentage)
@@ -265,11 +273,11 @@ def generate_scores(distance_measure: str, sampling_freq: int = 10, max_workers:
         print(f"model_egises_tuple: {model_egises_tuple}")
         print(f"model_accuracy_tuple: {model_accuracy_tuple}")
         utils.write_scores_to_csv([model_egises_tuple],
-                                  fields=["models", *list(range(100, 10, -20)), "bias", "variance"],
+                                  fields=header,
                                   filename=f"{SCORES_PATH}/{measure.__name__}/egises_scores_{version}.csv")
 
         utils.write_scores_to_csv([model_accuracy_tuple],
-                                  fields=["models", *list(range(100, 10, -20)), "bias", "variance"],
+                                  fields=header,
                                   filename=f"{SCORES_PATH}/{measure.__name__}/accuracy_scores_{version}.csv")
 
 
@@ -399,7 +407,7 @@ def calculate_correlation(dmeasure_1: str, dmeasure_2: str, pmeasure1: str = "pe
 @app.command()
 def get_borda_scores(dmeasure_1: str = "infoLM", dmeasure_2: str = "rougeL", p1_measure: str = "perseval",
                      p2_measure: str = "perseval_accuracy", m1_version="v2",
-                     m2_version="v2"):
+                     m2_version="v2") -> dict:
     """
     dmeasure_1: one of meteor, bleu, rougeL, rougeSU4, infoLM, jsd
     dmeasure_2: one of meteor, bleu, rougeL, rougeSU4, infoLM, jsd, hj
