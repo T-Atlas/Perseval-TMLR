@@ -219,6 +219,10 @@ def generate_scores(distance_measure: str, sampling_freq: int = 10, max_workers:
     except AssertionError as err:
         print(f"measure should be one of {measure_dict.keys()}")
         return
+
+    egises_csv_path = f"{SCORES_PATH}/{measure.__name__}/egises_scores_{version}.csv"
+    accuracy_csv_path = f"{SCORES_PATH}/{measure.__name__}/accuracy_scores_{version}.csv"
+
     # measure = calculate_meteor
     for model_name in tqdm([*PERSONALIZED_MODELS, *NON_PERSONALIZED_MODELS_LIST]):
         distance_directory = f"{SCORES_PATH}/{measure.__name__}/{model_name}"
@@ -274,11 +278,14 @@ def generate_scores(distance_measure: str, sampling_freq: int = 10, max_workers:
         print(f"model_accuracy_tuple: {model_accuracy_tuple}")
         utils.write_scores_to_csv([model_egises_tuple],
                                   fields=header,
-                                  filename=f"{SCORES_PATH}/{measure.__name__}/egises_scores_{version}.csv")
+                                  filename=egises_csv_path)
 
         utils.write_scores_to_csv([model_accuracy_tuple],
                                   fields=header,
-                                  filename=f"{SCORES_PATH}/{measure.__name__}/accuracy_scores_{version}.csv")
+                                  filename=accuracy_csv_path)
+    accuracy_df = pd.read_csv(accuracy_csv_path)
+    egises_df = pd.read_csv(egises_csv_path)
+    return accuracy_df, egises_df
 
 
 @app.command()
@@ -317,6 +324,8 @@ def generate_perseval_scores(distance_measure: str, sampling_freq: int = 10, max
         print(f"measure should be one of {measure_dict.keys()}")
         return
     # measure = calculate_meteor
+    accuracy_csv_path = f"{SCORES_PATH}/{measure.__name__}/perseval_accuracy_scores_{version}_simp_{simplified_flag}.csv"
+    perseval_csv_path = f"{SCORES_PATH}/{measure.__name__}/perseval_scores_{version}_simp_{simplified_flag}.csv"
     for model_name in tqdm([*PERSONALIZED_MODELS, *NON_PERSONALIZED_MODELS_LIST]):
         distance_directory = f"{SCORES_PATH}/{measure.__name__}/{model_name}"
         # for model_name in tqdm([*PERSONALIZED_MODELS]):
@@ -374,13 +383,17 @@ def generate_perseval_scores(distance_measure: str, sampling_freq: int = 10, max
 
         print(f"model_perseval_tuple: {model_perseval_tuple}")
         print(f"model_accuracy_tuple: {model_accuracy_tuple}")
+
         utils.write_scores_to_csv([model_perseval_tuple],
                                   fields=header,
-                                  filename=f"{SCORES_PATH}/{measure.__name__}/perseval_scores_{version}_simp_{simplified_flag}.csv")
+                                  filename=perseval_csv_path)
 
         utils.write_scores_to_csv([model_accuracy_tuple],
                                   fields=header,
-                                  filename=f"{SCORES_PATH}/{measure.__name__}/perseval_accuracy_scores_{version}_simp_{simplified_flag}.csv")
+                                  filename=accuracy_csv_path)
+    accuracy_df = pd.read_csv(accuracy_csv_path)
+    perseval_df = pd.read_csv(perseval_csv_path)
+    return accuracy_df, perseval_df
 
 
 @app.command()
