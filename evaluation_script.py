@@ -1,3 +1,5 @@
+import os
+
 import pandas as pd
 from scipy.stats import entropy
 import torch
@@ -19,7 +21,9 @@ import warnings
 import typer
 import utils
 
-DATA_SET_PATH = "dataset"
+CURRENT_DIR = os.path.dirname(os.path.realpath(__file__))
+
+DATA_SET_PATH = f"{CURRENT_DIR}/dataset"
 PERSONALIZED_MODELS = ("NAML_1", "NRMS_1", "NRMS_2", "EBNR_1", "EBNR_2")
 NON_PERSONALIZED_MODELS_LIST = ("big_bird", "brio", "prophetnet", "cls", "t5_base")
 
@@ -27,8 +31,8 @@ warnings.filterwarnings('ignore')
 
 app = typer.Typer()
 
-CONSOLIDATED_FILEPATH = f"dataset/final_tokenized_consolidated_data.jsonl"
-SCORES_PATH = f"scores"
+CONSOLIDATED_FILEPATH = f"{CURRENT_DIR}/dataset/final_tokenized_consolidated_data.jsonl"
+SCORES_PATH = f"{CURRENT_DIR}/scores"
 
 # load infoLM model only once
 # TODO: load model based on function argument
