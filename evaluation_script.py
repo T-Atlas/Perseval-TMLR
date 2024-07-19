@@ -45,31 +45,56 @@ bertscore = load("bertscore")
 
 
 def calculate_meteor(texts):
+    """
+    METEOR (Metric for Evaluation of Translation with Explicit ORdering):
+    :param texts:
+    :return:
+    """
+
     text1, text2 = texts
     tokens1 = text1.split()
     tokens2 = text2.split()
     result = meteor([tokens1], tokens2)
-    return round(result, 5)
+    # subtract from 1 since meteor a similarity measure
+    return 1.0 - round(result, 5)
 
 
 def calculate_bleu(texts):
+    """
+    BLEU (Bilingual Evaluation Understudy)
+    :param texts:
+    :return:
+    """
     text1, text2 = texts
     tokens1 = text1.split(" ")
     tokens2 = text2.split(" ")
     result = sentence_bleu([tokens1], tokens2)
     # print(round(result,5))
-    return round(result, 5)
+    # subtract from 1 since bleu is a similarity measure
+    return 1 - round(result, 5)
 
 
 def calculate_rougeL(texts):
+    """
+    ROUGE-L measures the longest common subsequence (LCS) between the reference and the candidate text.
+    :param texts:
+    :return:
+    """
     text1, text2 = texts
     scorer = rouge_scorer.RougeScorer(['rougeL'], use_stemmer=True)
     result = scorer.score(text1, text2)["rougeL"].fmeasure
     # print(round(result,5))
-    return round(result, 5)
+    # subtract from 1 since rougeL is a similarity measure
+    return 1 - round(result, 5)
 
 
 def calculate_rougeSU4(texts):
+    """
+    ROUGE-SU4 considers both skip-bigrams (pairs of words in the same order as they appear in the text, allowing up to 4
+     words to be skipped in between) and unigrams (individual words).
+    :param texts:
+    :return:
+    """
     candidate, reference = texts
     candidate = candidate.split(" ")
     reference = reference.split(" ")
@@ -89,7 +114,8 @@ def calculate_rougeSU4(texts):
     f_measure = (1 + beta ** 2) * precision * recall / (beta ** 2 * precision + recall) if (
                                                                                                    precision + recall) > 0 else 0.0
     # return precision, recall, f_measure
-    return round(f_measure, 5)
+    # subtract from 1 since rougeSU4 is a similarity measure
+    return 1.0 - round(f_measure, 5)
 
 
 def _text2distribution(text: list, common_vocab: set):
@@ -136,12 +162,14 @@ def calculate_JSD(texts):
     # Calculate Jensen-Shannon Divergence
     jsd_value = 0.5 * (kl_p + kl_q)
     jsd_value = round(jsd_value, 4)
+    # distance measure, so return as it is
     return jsd_value
 
 
 def calculate_infoLM(texts: list):
     pred, target = texts
     score = infolm([pred], [target]).item()
+    # distance measure, so return as it is
     return round(score, 5)
 
 
@@ -149,7 +177,8 @@ def calculate_bert_score(texts: list):
     pred, target = texts
     score = bertscore.compute(predictions=[pred], references=[target], lang="en", model_type="distilbert-base-uncased",
                               device='cuda')
-    return score['f1'][0]
+    # similarity measure, subtract from 1
+    return 1.0 - score['f1'][0]
 
 
 def calculate_hj(texts: list):
