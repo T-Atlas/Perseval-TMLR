@@ -71,7 +71,7 @@ def calculate_bleu(texts):
     result = sentence_bleu([tokens1], tokens2)
     # print(round(result,5))
     # subtract from 1 since bleu is a similarity measure
-    return 1 - round(result, 5)
+    return 1.0 - round(result, 5)
 
 
 def calculate_rougeL(texts):
@@ -85,7 +85,7 @@ def calculate_rougeL(texts):
     result = scorer.score(text1, text2)["rougeL"].fmeasure
     # print(round(result,5))
     # subtract from 1 since rougeL is a similarity measure
-    return 1 - round(result, 5)
+    return 1.0 - round(result, 5)
 
 
 def calculate_rougeSU4(texts):
