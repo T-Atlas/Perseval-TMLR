@@ -1,5 +1,5 @@
-# Egises subjectivity experiments
-This repository contains the code for the experiments on subjectivity detection in the EGISES project.
+# PerSEval experiments
+This repository contains the code for the experiments on evaluating the degree of personalization w.r.t PerSEval.
 
 [//]: # (PERSONALIZED_MODELS = &#40;"NAML_1", "NRMS_1", "NRMS_2", "EBNR_1", "EBNR_2"&#41;)
 [//]: # (NON_PERSONALIZED_MODELS_LIST = &#40;"big_bird", "brio", "prophetnet", "cls", "t5_base"&#41;)
