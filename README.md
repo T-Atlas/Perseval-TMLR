@@ -61,8 +61,13 @@ This repository contains the code for the experiments on evaluating the degree o
         │                           NON_PERSONALIZED_MODELS_LIST distance_measure: one of meteor,     │
         │                           bleu, rougeL, rougeSU4, infoLM, jsd max_workers: number of        │
         │                           workers to use for multiprocessing                                │
+
         ─────────────────────────────────────────────────────────────────────────────────────────────
-    ```
+
+## Dependency: Egises
+EGISES is a novel measure designed to automatically compute the degree of personalization in summarization models. This code provides the tools to evaluate a model's personalization capability using the EGISES measure. The repository is essential for computing the PerSEval Score, which assesses the personalization effectiveness of various summarization models.
+
+Source: https://github.com/KDM-LAB/EGISES-EMNLP23
 
 - `bash scripts`
   - run python scripts for different models, measures
