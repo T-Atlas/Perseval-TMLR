@@ -131,10 +131,10 @@ def test_dataset_consolidation(number_of_documents: int = 10):
 
 @app.command()
 def tokenize_experiment_data(input_path: str = f"{DATA_SET_PATH}/consolidated_data.jsonl",
-                             output_filepath: str = f"{DATA_SET_PATH}/finalutils._tokenized_consolidated_data.jsonl"):
+                             output_filepath: str = f"{DATA_SET_PATH}/final_tokenized_consolidated_data.jsonl"):
     """
     input_path: path to consolidated_data.jsonl
-    output_filepath: path to finalutils._tokenized_consolidated_data.jsonl
+    output_filepath: path to final_tokenized_consolidated_data.jsonl
     """
 
     with open(output_filepath, "w") as fpw:
